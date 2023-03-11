@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Modal } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';

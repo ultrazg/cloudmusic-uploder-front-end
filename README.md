@@ -9,6 +9,13 @@ cd cloudmusic-uploder-front-end
 yarn
 ```
 
+## 配置
+配置请求地址和端口
+```typescript
+// config.ts
+export const BASE_URL = 'http://localhost:3000/';
+```
+
 ## 运行
 
 ```shell

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.scss';
 import Footer from '../../layout/footer';
+import { BASE_URL } from '../../config';
 import {
   Divider,
   message,
@@ -21,7 +22,7 @@ const props: UploadProps = {
   name: 'songFile',
   multiple: true,
   withCredentials: true,
-  action: `http://localhost:3000/cloud?time=${Date.now()}`,
+  action: `${BASE_URL}cloud?time=${Date.now()}`,
   onChange(info) {
     const { status } = info.file;
     if (status !== 'uploading') {
@@ -64,7 +65,7 @@ function Index() {
    */
   const getLoginStatus = async (cookie: string | null) => {
     const res = await axios({
-      url: `http://localhost:3000/login/status?timestamp=${Date.now()}`,
+      url: `${BASE_URL}login/status?timestamp=${Date.now()}`,
       method: 'post',
       data: {
         cookie
@@ -80,12 +81,10 @@ function Index() {
   const login = async () => {
     let timer: string | number | NodeJS.Timer | undefined;
     const timestamp = Date.now();
-    const res = await axios(
-      `http://localhost:3000/login/qr/key?timestamp=${timestamp}`
-    );
+    const res = await axios(`${BASE_URL}login/qr/key?timestamp=${timestamp}`);
     const key = res.data.data.unikey;
     const res2 = await axios(
-      `http://localhost:3000/login/qr/create?key=${key}&qrimg=true&timestamp=${timestamp}`
+      `${BASE_URL}login/qr/create?key=${key}&qrimg=true&timestamp=${timestamp}`
     );
     setQRCode(res2.data.data.qrimg);
 
@@ -113,7 +112,7 @@ function Index() {
    */
   const pollingCheckQRLogin = async (key: string) => {
     const res = await axios(
-      `http://localhost:3000/login/qr/check?key=${key}&timestamp=${Date.now()}`
+      `${BASE_URL}login/qr/check?key=${key}&timestamp=${Date.now()}`
     );
 
     return res.data;
