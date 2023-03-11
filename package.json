@@ -1,0 +1,69 @@
+{
+  "name": "cloudmusic-uploder-front-end",
+  "version": "1.0.0",
+  "private": true,
+  "description": "网易云音乐云盘上传助手，可以在网页端上传音乐文件到网易云的个人云盘",
+  "author": {
+    "name": "unknown",
+    "email": "742005790@qq.com",
+    "url": "https://github.com/ultrazg"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.14",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "antd": "^5.1.6",
+    "axios": "^1.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "keywords": [
+    "Node.js",
+    "React.js",
+    "Netease Cloud Music",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ultrazg/cloudmusic-uploder-front-end"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
+}
