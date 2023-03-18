@@ -20,7 +20,6 @@ function Index() {
       >
         关于
       </Button>
-      <div>made with ❤️ by unknown</div>
       <AboutModal open={open} onClose={toggleModalOpen} />
     </div>
   );

@@ -125,9 +125,12 @@ function Index() {
           「网易云音乐」云盘上传助手
           {isLogin ? (
             <Dropdown menu={{ items }} placement='bottomRight'>
-              <a style={{ float: 'right' }} onClick={(e) => e.preventDefault()}>
+              <span
+                style={{ float: 'right' }}
+                onClick={(e) => e.preventDefault()}
+              >
                 <Avatar size='large' icon={<img src={avatar} alt='avatar' />} />
-              </a>
+              </span>
             </Dropdown>
           ) : null}
         </h3>

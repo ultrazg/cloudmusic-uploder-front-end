@@ -26,6 +26,7 @@ function Index(props: IProps) {
           <a
             href='https://github.com/Binaryify/NeteaseCloudMusicApi'
             target='_blank'
+            rel='noopener noreferrer'
             style={{ color: '#cf1322' }}
           >
             NeteaseCloudMusicApi
