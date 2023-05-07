@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styles from './index.module.scss';
 import Footer from '../../layout/footer';
-import { BASE_URL } from '../../config';
+import {BASE_URL} from '../../config';
 import {
   Divider,
   message,
@@ -11,11 +11,11 @@ import {
   Avatar,
   Dropdown
 } from 'antd';
-import { CloudUploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import {CloudUploadOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import axios from 'axios';
-import type { UploadProps, MenuProps } from 'antd';
+import type {UploadProps, MenuProps} from 'antd';
 
-const { Dragger } = Upload;
+const {Dragger} = Upload;
 axios.defaults.withCredentials = true;
 
 const props: UploadProps = {
@@ -24,7 +24,7 @@ const props: UploadProps = {
   withCredentials: true,
   action: `${BASE_URL}cloud?time=${Date.now()}`,
   onChange(info) {
-    const { status } = info.file;
+    const {status} = info.file;
     if (status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
@@ -43,6 +43,7 @@ function Index() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [QRCode, setQRCode] = useState<string>('');
   const [avatar, setAvatar] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const items: MenuProps['items'] = [
     {
@@ -79,6 +80,7 @@ function Index() {
    * 登录
    */
   const login = async () => {
+    setLoading(true);
     let timer: string | number | NodeJS.Timer | undefined;
     const timestamp = Date.now();
     const res = await axios(`${BASE_URL}login/qr/key?timestamp=${timestamp}`);
@@ -86,7 +88,11 @@ function Index() {
     const res2 = await axios(
       `${BASE_URL}login/qr/create?key=${key}&qrimg=true&timestamp=${timestamp}`
     );
-    setQRCode(res2.data.data.qrimg);
+
+    if (res2.data.code === 200) {
+      setQRCode(res2.data.data.qrimg);
+      setLoading(false)
+    }
 
     timer = setInterval(async () => {
       const statusRes = await pollingCheckQRLogin(key);
@@ -124,23 +130,23 @@ function Index() {
         <h3 className={styles['title']}>
           「网易云音乐」云盘上传助手
           {isLogin ? (
-            <Dropdown menu={{ items }} placement='bottomRight'>
+            <Dropdown menu={{items}} placement='bottomRight'>
               <span
-                style={{ float: 'right' }}
+                style={{float: 'right'}}
                 onClick={(e) => e.preventDefault()}
               >
-                <Avatar size='large' icon={<img src={avatar} alt='avatar' />} />
+                <Avatar size='large' icon={<img src={avatar} alt='avatar'/>}/>
               </span>
             </Dropdown>
           ) : null}
         </h3>
       </div>
-      <Divider />
+      <Divider/>
       {isLogin ? (
         <div>
-          <Dragger {...props} style={{ height: '100px' }}>
+          <Dragger {...props} style={{height: '100px'}}>
             <p className='ant-upload-drag-icon'>
-              <CloudUploadOutlined />
+              <CloudUploadOutlined/>
             </p>
             <p className='ant-upload-text'>点击或将文件拖拽到此处</p>
             <p className='ant-upload-hint'>支持单个或批量文件上传</p>
@@ -152,7 +158,7 @@ function Index() {
             使用网易云音乐 APP 扫码登录
             <Tooltip title='仅用于获取账号云盘信息，本站并不会记录用户数据'>
               <InfoCircleOutlined
-                style={{ marginLeft: 5, color: '#bfbfbf', cursor: 'pointer' }}
+                style={{marginLeft: 5, color: '#bfbfbf', cursor: 'pointer'}}
               />
             </Tooltip>
           </div>
@@ -162,18 +168,19 @@ function Index() {
               onClick={() => {
                 login();
               }}
+              loading={loading}
             >
               {QRCode ? '刷新二维码' : '获取二维码'}
             </Button>
             <img
               src={QRCode}
               alt='qr-code-img'
-              style={QRCode ? {} : { display: 'none' }}
+              style={QRCode ? {} : {display: 'none'}}
             />
           </div>
         </div>
       )}
-      <Footer />
+      <Footer/>
     </div>
   );
 }
